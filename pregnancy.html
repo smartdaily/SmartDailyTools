@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Pregnancy Calculator</title>
+  <meta charset="UTF-8" />
+  <title>Pregnancy Due Date Calculator</title>
+  <style>
+    body { font-family: Arial; background: #fffaf4; padding: 20px; }
+    h1 { color: #d67d00; }
+    input, button { padding: 8px; margin-top: 10px; display: block; }
+    #result { margin-top: 20px; font-weight: bold; }
+  </style>
 </head>
 <body>
   <h1>Pregnancy Due Date Calculator</h1>
-  <p>Coming soon...</p>
-  <a href="index.html">Back</a>
+  <label for="lastPeriod">First day of your last period:</label>
+  <input type="date" id="lastPeriod">
+  <button onclick="calculateDueDate()">Calculate Due Date</button>
+  <p id="result"></p>
+  <a href="index.html">⬅️ Back to Home</a>
+
+  <script>
+    function calculateDueDate() {
+      const inputDate = new Date(document.getElementById('lastPeriod').value);
+      if (!inputDate.getTime()) {
+        document.getElementById('result').innerText = "Please enter a valid date.";
+        return;
+      }
+      const dueDate = new Date(inputDate);
+      dueDate.setDate(dueDate.getDate() + 280); // 40 weeks
+      document.getElementById('result').innerText =
+        "Estimated Due Date: " + dueDate.toDateString();
+    }
+  </script>
 </body>
 </html>
+
