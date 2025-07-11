@@ -5,55 +5,65 @@
   <title>Currency Converter</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
       background: #f0f8ff;
+      padding: 20px;
+      text-align: center;
     }
     h1 {
-      color: #333;
+      color: #007acc;
     }
     label, select, input {
       margin: 10px 0;
       display: block;
+      width: 80%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
     }
     button {
-      padding: 8px 16px;
-      background-color: #28a745;
+      padding: 10px 20px;
+      background-color: #007acc;
       color: white;
       border: none;
+      border-radius: 10px;
       cursor: pointer;
       margin-top: 10px;
+    }
+    button:hover {
+      background-color: #005f99;
     }
     #result {
       margin-top: 15px;
       font-weight: bold;
-      color: #2c3e50;
+    }
+    a {
+      margin-top: 20px;
+      display: inline-block;
+      color: #007acc;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <h1>Currency Converter</h1>
-  <label>Amount:</label>
   <input type="number" id="amount" placeholder="Enter amount" />
-
-  <label>From:</label>
   <select id="from">
     <option value="USD">USD</option>
     <option value="EUR">EUR</option>
     <option value="KES">KES</option>
   </select>
-
-  <label>To:</label>
   <select id="to">
     <option value="USD">USD</option>
     <option value="EUR">EUR</option>
     <option value="KES">KES</option>
   </select>
-
   <button onclick="convert()">Convert</button>
-
   <p id="result"></p>
-  <br><a href="index.html">⬅️ Back to Home</a>
+  <a href="index.html">⬅️ Back to Home</a>
 
   <script>
     const rates = {
@@ -74,12 +84,12 @@
 
       const rate = rates[from][to];
       const result = amount * rate;
-
-      document.getElementById("result").innerText = 
+      document.getElementById("result").innerText =
         `${amount} ${from} = ${result.toFixed(2)} ${to}`;
     }
   </script>
 </body>
 </html>
+
 
 
