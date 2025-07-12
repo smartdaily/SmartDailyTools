@@ -1,95 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Loan Calculator</title>
+  <title>Loan Calculator - SmartDaily Tools</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body <!-- Branding Bar Start -->
-<div style="background-color:#0A3D62; color:white; padding:10px 20px; font-size:18px; font-weight:bold;">
-  SmartDaily Tools 🔧 | Free & Simple Tools for Everyday Use
-</div>
-<!-- Branding Bar End -->
- {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9faff;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       text-align: center;
-      padding: 20px;
     }
-    h1 {
-      color: #007acc;
+    .branding {
+      background-color: #0A3D62;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    input {
+    .branding img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    h2 {
+      margin-top: 20px;
+    }
+    input, button {
+      margin: 8px;
       padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
       width: 80%;
       max-width: 300px;
-      margin: 10px auto;
-      display: block;
-      border-radius: 10px;
-      border: 1px solid #ccc;
     }
     button {
-      padding: 10px 20px;
-      background-color: #007acc;
+      background-color: #0A3D62;
       color: white;
       border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 15px;
     }
-    button:hover {
-      background-color: #005f99;
+    .footer {
+      margin-top: 50px;
+      background-color: #f0f0f0;
+      padding: 15px;
+      font-size: 14px;
+      color: #333;
     }
-    #result {
-      margin-top: 20px;
-      font-weight: bold;
-    }
-    a {
+    .back-button {
       margin-top: 30px;
-      display: inline-block;
-      text-decoration: none;
-      color: #007acc;
     }
   </style>
 </head>
 <body>
-  <h1>Loan Calculator</h1>
 
-  <input type="number" id="amount" placeholder="Loan Amount (e.g. 500000)">
-  <input type="number" id="interest" placeholder="Annual Interest Rate (%)">
-  <input type="number" id="years" placeholder="Loan Term (Years)">
+<!-- Branding Bar -->
+<div class="branding">
+  <img src="logo.png" alt="Logo" />
+  SmartDaily Tools 🔧 | Free & Simple Tools for Everyday Use
+</div>
 
-  <button onclick="calculateLoan()">Calculate</button>
+<h2>Loan Calculator</h2>
+<label>Loan Amount:</label><br />
+<input type="number" id="amount" /><br />
+<label>Interest Rate (% per year):</label><br />
+<input type="number" id="rate" /><br />
+<label>Loan Term (in months):</label><br />
+<input type="number" id="months" /><br />
+<button onclick="calculateLoan()">Calculate Monthly Payment</button>
+<p id="result"></p>
 
-  <div id="result"></div>
+<!-- Back to Home -->
+<div class="back-button">
+  <a href="index.html" style="text-decoration:none;">
+    <button>⬅️ Back to Home</button>
+  </a>
+</div>
 
-  <a href="index.html">⬅️ Back to Home</a>
+<!-- Footer -->
+<div class="footer">
+  © 2025 SmartDaily Tools. All rights reserved.
+</div>
 
-  <script>
-    function calculateLoan() {
-      const principal = parseFloat(document.getElementById("amount").value);
-      const interestRate = parseFloat(document.getElementById("interest").value) / 100 / 12;
-      const years = parseFloat(document.getElementById("years").value);
-      const payments = years * 12;
+<script>
+  function calculateLoan() {
+    let P = parseFloat(document.getElementById('amount').value);
+    let annualRate = parseFloat(document.getElementById('rate').value);
+    let n = parseFloat(document.getElementById('months').value);
 
-      if (isNaN(principal) || isNaN(interestRate) || isNaN(years)) {
-        document.getElementById("result").innerText = "Please fill in all fields correctly.";
-        return;
-      }
-
-      const x = Math.pow(1 + interestRate, payments);
-      const monthly = (principal * x * interestRate) / (x - 1);
-      const totalPayment = monthly * payments;
-      const totalInterest = totalPayment - principal;
-
-      document.getElementById("result").innerHTML = `
-        📆 Monthly Payment: <strong>${monthly.toFixed(2)}</strong><br>
-        💰 Total Payment: <strong>${totalPayment.toFixed(2)}</strong><br>
-        🧮 Total Interest: <strong>${totalInterest.toFixed(2)}</strong>
-      `;
+    if (!P || !annualRate || !n) {
+      document.getElementById('result').innerText = "Please fill in all fields correctly.";
+      return;
     }
-  </script>
+
+    let r = (annualRate / 100) / 12; // monthly interest rate
+    let payment = (P * r) / (1 - Math.pow(1 + r, -n));
+    document.getElementById('result').innerText = "Monthly Payment: $" + payment.toFixed(2);
+  }
+</script>
+
 </body>
 </html>
+
 
 
 
