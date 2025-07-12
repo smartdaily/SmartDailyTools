@@ -76,8 +76,28 @@
   © 2025 SmartDaily Tools. All rights reserved.
 </div>
 
+<!-- Fixed Script -->
 <script>
-  function c
+  function calculateDueDate() {
+    const input = document.getElementById("lastPeriod");
+    const result = document.getElementById("result");
+
+    const lastPeriod = new Date(input.value);
+    if (isNaN(lastPeriod.getTime())) {
+      result.innerText = "⚠️ Please enter a valid date.";
+      return;
+    }
+
+    const dueDate = new Date(lastPeriod);
+    dueDate.setDate(dueDate.getDate() + 280);
+
+    result.innerText = "👶 Estimated Due Date: " + dueDate.toDateString();
+  }
+</script>
+
+</body>
+</html>
+
 
 
 
