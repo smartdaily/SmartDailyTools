@@ -65,11 +65,25 @@
 <select id="from">
   <option value="USD">USD</option>
   <option value="KES">KES</option>
+  <option value="TZS">TZS</option>
+  <option value="UGX">UGX</option>
+  <option value="NGN">NGN</option>
+  <option value="GHS">GHS</option>
+  <option value="ZAR">ZAR</option>
+  <option value="ETB">ETB</option>
+  <option value="RWF">RWF</option>
 </select><br />
 <label>To:</label><br />
 <select id="to">
-  <option value="KES">KES</option>
   <option value="USD">USD</option>
+  <option value="KES">KES</option>
+  <option value="TZS">TZS</option>
+  <option value="UGX">UGX</option>
+  <option value="NGN">NGN</option>
+  <option value="GHS">GHS</option>
+  <option value="ZAR">ZAR</option>
+  <option value="ETB">ETB</option>
+  <option value="RWF">RWF</option>
 </select><br />
 <button onclick="convert()">Convert</button>
 <p id="result"></p>
@@ -87,24 +101,38 @@
 </div>
 
 <script>
-  function convert() {
-    let amount = parseFloat(document.getElementById('amount').value);
-    let from = document.getElementById('from').value;
-    let to = document.getElementById('to').value;
-    let rate = 160;
+  const exchangeRates = {
+    USD: { KES: 160, TZS: 2550, UGX: 3800, NGN: 1500, GHS: 12, ZAR: 18, ETB: 57, RWF: 1300, USD: 1 },
+    KES: { USD: 1/160, TZS: 16, UGX: 23.75, NGN: 9.5, GHS: 0.075, ZAR: 0.11, ETB: 0.36, RWF: 8.1, KES: 1 },
+    TZS: { USD: 1/2550, KES: 1/16, UGX: 1.5, NGN: 0.6, GHS: 0.005, ZAR: 0.007, ETB: 0.022, RWF: 0.5, TZS: 1 },
+    UGX: { USD: 1/3800, KES: 1/23.75, TZS: 1/1.5, NGN: 0.4, GHS: 0.004, ZAR: 0.006, ETB: 0.015, RWF: 0.35, UGX: 1 },
+    NGN: { USD: 1/1500, KES: 1/9.5, TZS: 1/0.6, UGX: 1/0.4, GHS: 0.01, ZAR: 0.012, ETB: 0.04, RWF: 1.3, NGN: 1 },
+    GHS: { USD: 1/12, KES: 13.3, TZS: 200, UGX: 260, NGN: 100, ZAR: 1.5, ETB: 4.5, RWF: 110, GHS: 1 },
+    ZAR: { USD: 1/18, KES: 9, TZS: 142, UGX: 190, NGN: 85, GHS: 0.66, ETB: 3, RWF: 90, ZAR: 1 },
+    ETB: { USD: 1/57, KES: 2.75, TZS: 45, UGX: 66, NGN: 25, GHS: 0.22, ZAR: 0.33, RWF: 30, ETB: 1 },
+    RWF: { USD: 1/1300, KES: 0.12, TZS: 2, UGX: 2.85, NGN: 0.77, GHS: 0.009, ZAR: 0.011, ETB: 0.033, RWF: 1 }
+  };
 
-    if (from === to) {
-      document.getElementById('result').innerText = amount;
-    } else if (from === 'USD' && to === 'KES') {
-      document.getElementById('result').innerText = (amount * rate).toFixed(2);
-    } else if (from === 'KES' && to === 'USD') {
-      document.getElementById('result').innerText = (amount / rate).toFixed(2);
+  function convert() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    const from = document.getElementById('from').value;
+    const to = document.getElementById('to').value;
+
+    if (!amount || amount <= 0) {
+      document.getElementById('result').innerText = "⚠️ Please enter a valid amount.";
+      return;
     }
+
+    const rate = exchangeRates[from][to];
+    const result = amount * rate;
+
+    document.getElementById('result').innerText = `Converted: ${result.toFixed(2)} ${to}`;
   }
 </script>
 
 </body>
 </html>
+
 
 
 
