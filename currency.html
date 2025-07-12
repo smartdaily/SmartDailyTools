@@ -5,12 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-<br /><br />
-<a href="index.html" style="text-decoration:none;">
-  <button style="padding:10px 20px; font-size:16px; background-color:#0A3D62; color:white; border:none; border-radius:5px;">
-    ⬅️ Back to Home
-  </button>
-</a>
 <body>
 
 <!-- Branding Bar Start -->
@@ -35,13 +29,19 @@
 <button onclick="convert()">Convert</button>
 <p id="result"></p>
 
+<br /><br />
+<a href="./index.html" style="text-decoration:none;">
+  <button style="padding:10px 20px; font-size:16px; background-color:#0A3D62; color:white; border:none; border-radius:5px;">
+    ⬅️ Back to Home
+  </button>
+</a>
+
 <script>
   function convert() {
     let amount = parseFloat(document.getElementById('amount').value);
     let from = document.getElementById('from').value;
     let to = document.getElementById('to').value;
-
-    let rate = 160; // Example rate 1 USD = 160 KES
+    let rate = 160;
 
     if (from === to) {
       document.getElementById('result').innerText = amount;
@@ -52,8 +52,10 @@
     }
   }
 </script>
+
 </body>
 </html>
+
 
 
 
