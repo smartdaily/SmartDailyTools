@@ -4,14 +4,59 @@
   <title>Pregnancy Due Date Calculator - SmartDaily Tools</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .branding {
+      background-color: #0A3D62;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .branding img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    h2 {
+      margin-top: 20px;
+    }
+    input, button {
+      margin: 8px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      background-color: #0A3D62;
+      color: white;
+      border: none;
+    }
+    .footer {
+      margin-top: 50px;
+      background-color: #f0f0f0;
+      padding: 15px;
+      font-size: 14px;
+      color: #333;
+    }
+    .back-button {
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Branding Bar Start -->
-<div style="background-color:#0A3D62; color:white; padding:10px 20px; font-size:18px; font-weight:bold;">
+<!-- Branding Bar -->
+<div class="branding">
+  <img src="logo.png" alt="Logo" />
   SmartDaily Tools 🔧 | Free & Simple Tools for Everyday Use
 </div>
-<!-- Branding Bar End -->
 
 <h2>Pregnancy Due Date Calculator</h2>
 <label>Enter the first day of your last period:</label><br />
@@ -19,30 +64,21 @@
 <button onclick="calculateDueDate()">Calculate Due Date</button>
 <p id="result"></p>
 
-<br /><br />
-<a href="./index.html" style="text-decoration:none;">
-  <button style="padding:10px 20px; font-size:16px; background-color:#0A3D62; color:white; border:none; border-radius:5px;">
-    ⬅️ Back to Home
-  </button>
-</a>
+<!-- Back to Home -->
+<div class="back-button">
+  <a href="index.html" style="text-decoration:none;">
+    <button>⬅️ Back to Home</button>
+  </a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  © 2025 SmartDaily Tools. All rights reserved.
+</div>
 
 <script>
-  function calculateDueDate() {
-    let lastPeriod = new Date(document.getElementById('lastPeriod').value);
-    if (!lastPeriod.getTime()) {
-      document.getElementById('result').innerText = "Please select a valid date.";
-      return;
-    }
+  function c
 
-    let dueDate = new Date(lastPeriod);
-    dueDate.setDate(dueDate.getDate() + 280); // 280 days = 40 weeks
-
-    document.getElementById('result').innerText = "Estimated Due Date: " + dueDate.toDateString();
-  }
-</script>
-
-</body>
-</html>
 
 
 
