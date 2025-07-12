@@ -6,14 +6,55 @@
   <style>
     body { font-family: Georgia; padding: 20px; background: #f9f4ff; }
     h1 { color: #6a1b9a; }
-    button { padding: 10px 20px; margin-top: 15px; background: #6a1b9a; color: white; border: none; cursor: pointer; }
-    #quote { font-size: 1.2em; margin-top: 20px; font-style: italic; }
+    button { padding: 10px 20px; margin-top: 15px; background: #6a1b9a; color: white; border: none; cursor: pointer;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Daily Quote Generator</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f9f4ff;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #6a1b9a;
+    }
+    button {
+      padding: 12px 24px;
+      margin-top: 20px;
+      background-color: #6a1b9a;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #4e1470;
+    }
+    #quote {
+      font-size: 1.2em;
+      margin-top: 30px;
+      font-style: italic;
+      color: #333;
+      padding: 0 20px;
+    }
+    a {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #6a1b9a;
+    }
   </style>
 </head>
 <body>
-  <h1>Daily Quote Generator</h1>
-  <button onclick="getQuote()">✨ Show Quote</button>
-  <p id="quote"></p>
+  <h1>💬 Daily Quote Generator</h1>
+  <button onclick="getQuote()">✨ Show Me a Quote</button>
+  <p id="quote">Click the button for today's inspiration...</p>
   <a href="index.html">⬅️ Back to Home</a>
 
   <script>
@@ -24,14 +65,14 @@
       "Doubt kills more dreams than failure ever will.",
       "Discipline is the bridge between goals and accomplishment.",
       "Start where you are. Use what you have. Do what you can.",
-      "Push yourself, because no one else is going to do it for you."
+      "Push yourself, because no one else is going to do it for you.",
+      "You are stronger than you think."
     ];
 
     function getQuote() {
       const randomIndex = Math.floor(Math.random() * quotes.length);
-      document.getElementById('quote').innerText = quotes[randomIndex];
+      document.getElementById("quote").innerText = quotes[randomIndex];
     }
   </script>
 </body>
 </html>
-
