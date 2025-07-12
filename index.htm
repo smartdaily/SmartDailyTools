@@ -1,122 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
   <title>SmartDaily Tools</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-    
-    }<div style="max-width: 500px; margin: auto; padding: 20px; font-family: sans-serif;">
-
-  <h2 style="text-align:center;">🛠 Smart Daily Tools</h2>
-
-  <!-- Finance Tools -->
-  <div style="background:#f9f9f9; padding:15px; margin-bottom:10px; border-radius:8px;">
-    <h3>💰 Finance Tools</h3>
-    <button style="width:100%; margin:5px 0;">💱 Currency Converter</button>
-  </div>
-
-  <!-- Health Tools -->
-  <div style="background:#f9f9f9; padding:15px; margin-bottom:10px; border-radius:8px;">
-    <h3>🩺 Health Tools</h3>
-    <button style="width:100%; margin:5px 0;">⚖️ BMI Checker</button>
-    <button style="width:100%; margin:5px 0;">🤰 Pregnancy Calculator</button>
-  </div>
-
-  <!-- Daily Motivation -->
-  <div style="background:#f9f9f9; padding:15px; margin-bottom:10px; border-radius:8px;">
-    <h3>🧠 Daily Motivation</h3>
-    <button style="width:100%; margin:5px 0;">🧠 Daily Quotes</button>
-  </div>
-
-  <!-- Measurement Tools -->
-  <div style="background:#f9f9f9; padding:15px; margin-bottom:10px; border-radius:8px;">
-    <h3>📏 Measurement Tools</h3>
-    <button style="width:100%; margin:5px 0;">📏 Length Converter</button>
-  </div>
-
-  <!-- Time & Date Tools -->
-  <div style="background:#f9f9f9; padding:15px; margin-bottom:10px; border-radius:8px;">
-    <h3>📅 Date & Time Tools</h3>
-    <button style="width:100%; margin:5px 0;">📅 Date Calculator</button>
-  </div>
-
-</div>
-
-    header {
-      background-color: #0099cc;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .branding {
+      background-color: #0A3D62;
       color: white;
-      padding: 20px 10px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .branding img {
+      height: 30px;
+      margin-right: 10px;
     }
     h1 {
-      margin: 0;
-      font-size: 2em;
+      margin-top: 20px;
+      font-size: 28px;
     }
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 30px auto;
-      max-width: 400px;
-    }
-    li {
-      margin: 15px 0;
-    }
-    a {
+    .tool-button {
       display: block;
-      background-color: #ffffff;
-      border: 1px solid #0099cc;
-      color: #0099cc;
-      padding: 12px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    a:hover {
-      background-color: #0099cc;
+      margin: 10px auto;
+      padding: 15px 25px;
+      font-size: 16px;
+      background-color: #0A3D62;
       color: white;
+      border: none;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 300px;
+      text-decoration: none;
     }
-    footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #777;
-      padding-bottom: 20px;
-    }
-
-    @media screen and (max-width: 600px) {
-      h1 {
-        font-size: 1.5em;
-      }
-      a {
-        font-size: 1em;
-        padding: 10px;
-      }
+    .footer {
+      margin-top: 50px;
+      background-color: #f0f0f0;
+      padding: 15px;
+      font-size: 14px;
+      color: #333;
+      position: relative;
+      bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>SmartDaily Tools</h1>
-    <p>Simple tools for your smart daily life 💡</p>
-  </header>
+<!-- Branding Bar -->
+<div class="branding">
+  <img src="logo.png" alt="Logo" />
+  SmartDaily Tools 🔧 | Free & Simple Tools for Everyday Use
+</div>
 
-  <ul>
-    <li><a href="currency.html">💱 Currency Converter</a></li>
-    <li><a href="loan.html">📊 Loan Calculator</a></li>
-    <li><a href="pregnancy.html">🤰 Pregnancy Due Date Calculator</a></li>
-    <li><a href="bmi.html">⚖️ BMI Calculator</a></li>
-    <li><a href="quote.html">💡 Daily Quote Generator</a></li>
-  </ul>
+<h1>Simple Tools for Your Smart Daily Life</h1>
 
-  <footer>
-<footer>
-  © 2025 SmartDaily Tols 
-</footer>
+<!-- Tool Links -->
+<a class="tool-button" href="currency.html">💱 Currency Converter</a>
+<a class="tool-button" href="bmi.html">📏 BMI Calculator</a>
+<a class="tool-button" href="pregnancy.html">🤰 Pregnancy Due Date</a>
+<!-- Future: <a class="tool-button" href="age.html">🎂 Age Calculator</a> -->
 
-  </footer>
+<!-- Footer -->
+<div class="footer">
+  © 2025 SmartDaily Tools. All rights reserved.
+</div>
 
 </body>
 </html>
+
 
 
