@@ -1,100 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <title>Currency Converter - SmartDaily Tools</title>
   <meta charset="UTF-8" />
-  <title>Currency Converter</title>
-  <style>
-    body <!-- Branding Bar Start -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+<!-- Branding Bar Start -->
 <div style="background-color:#0A3D62; color:white; padding:10px 20px; font-size:18px; font-weight:bold;">
   SmartDaily Tools 🔧 | Free & Simple Tools for Everyday Use
 </div>
 <!-- Branding Bar End -->
-{
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f8ff;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      color: #007acc;
-    }
-    label, select, input {
-      margin: 10px 0;
-      display: block;
-      width: 80%;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #007acc;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #005f99;
-    }
-    #result {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    a {
-      margin-top: 20px;
-      display: inline-block;
-      color: #007acc;
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-  <h1>Currency Converter</h1>
-  <input type="number" id="amount" placeholder="Enter amount" />
-  <select id="from">
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
-    <option value="KES">KES</option>
-  </select>
-  <select id="to">
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
-    <option value="KES">KES</option>
-  </select>
-  <button onclick="convert()">Convert</button>
-  <p id="result"></p>
-  <a href="index.html">⬅️ Back to Home</a>
 
-  <script>
-    const rates = {
-      USD: { EUR: 0.91, KES: 129.5, USD: 1 },
-      EUR: { USD: 1.1, KES: 142.5, EUR: 1 },
-      KES: { USD: 0.0077, EUR: 0.007, KES: 1 }
-    };
+<h2>Currency Converter</h2>
+<label>Amount:</label><br />
+<input type="number" id="amount" /><br />
+<label>From:</label><br />
+<select id="from">
+  <option value="USD">USD</option>
+  <option value="KES">KES</option>
+</select><br />
+<label>To:</label><br />
+<select id="to">
+  <option value="KES">KES</option>
+  <option value="USD">USD</option>
+</select><br />
+<button onclick="convert()">Convert</button>
+<p id="result"></p>
 
-    function convert() {
-      const amount = parseFloat(document.getElementById("amount").value);
-      const from = document.getElementById("from").value;
-      const to = document.getElementById("to").value;
+<script>
+  function convert() {
+    let amount = parseFloat(document.getElementById('amount').value);
+    let from = document.getElementById('from').value;
+    let to = document.getElementById('to').value;
 
-      if (isNaN(amount)) {
-        document.getElementById("result").innerText = "Please enter a valid amount.";
-        return;
-      }
+    let rate = 160; // Example rate 1 USD = 160 KES
 
-      const rate = rates[from][to];
-      const result = amount * rate;
-      document.getElementById("result").innerText =
-        `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+    if (from === to) {
+      document.getElementById('result').innerText = amount;
+    } else if (from === 'USD' && to === 'KES') {
+      document.getElementById('result').innerText = (amount * rate).toFixed(2);
+    } else if (from === 'KES' && to === 'USD') {
+      document.getElementById('result').innerText = (amount / rate).toFixed(2);
     }
-  </script>
+  }
+</script>
 </body>
 </html>
+
 
 
 
