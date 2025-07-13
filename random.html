@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Number Generator - SmartDaily Tools</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .branding {
+      background-color: #0A3D62;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .branding img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    h2 {
+      margin-top: 20px;
+    }
+    input, button {
+      margin: 8px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      background-color: #0A3D62;
+      color: white;
+      border: none;
+    }
+    .footer {
+      margin-top: 50px;
+      background-color: #f0f0f0;
+      padding: 15px;
+      font-size: 14px;
+      color: #333;
+    }
+    .back-button {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Branding -->
+<div class="branding">
+  <img src="logo.png" alt="Logo" />
+  SmartDaily Tools 🔧 | Free & Simple Tools for Everyday Use
+</div>
+
+<h2>Random Number Generator</h2>
+<input type="number" id="min" placeholder="Minimum value" /><br />
+<input type="number" id="max" placeholder="Maximum value" /><br />
+<button onclick="generateNumber()">Generate</button>
+<p id="output"></p>
+
+<!-- Back to Home -->
+<div class="back-button">
+  <a href="index.html"><button>⬅️ Back to Home</button></a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  © 2025 SmartDaily Tools. All rights reserved.
+</div>
+
+<script>
+  function generateNumber() {
+    const min = parseInt(document.getElementById('min').value);
+    const max = parseInt(document.getElementById('max').value);
+    const output = document.getElementById('output');
+
+    if (isNaN(min) || isNaN(max) || min >= max) {
+      output.innerText = "⚠️ Enter a valid range (min < max).";
+      return;
+    }
+
+    const random = Math.floor(Math.random() * (max - min + 1)) + min;
+    output.innerText = `🎲 Random Number: ${random}`;
+  }
+</script>
+
+</body>
+</html>
