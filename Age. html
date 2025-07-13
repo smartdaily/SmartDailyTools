@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Age Calculator - SmartDaily Tools</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .branding {
+      background-color: #0A3D62;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .branding img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    h2 {
+      margin-top: 20px;
+    }
+    input, button {
+      margin: 8px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      background-color: #0A3D62;
+      color: white;
+      border: none;
+    }
+    .footer {
+      margin-top: 50px;
+      background-color: #f0f0f0;
+      padding: 15px;
+      font-size: 14px;
+      color: #333;
+    }
+    .back-button {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Branding Bar -->
+<div class="branding">
+  <img src="logo.png" alt="Logo" />
+  SmartDaily Tools 🔧 | Free & Simple Tools for Everyday Use
+</div>
+
+<h2>Age Calculator</h2>
+<label>Select your date of birth:</label><br />
+<input type="date" id="dob" /><br />
+<button onclick="calculateAge()">Calculate Age</button>
+<p id="result"></p>
+
+<!-- Back to Home -->
+<div class="back-button">
+  <a href="index.html" style="text-decoration:none;">
+    <button>⬅️ Back to Home</button>
+  </a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  © 2025 SmartDaily Tools. All rights reserved.
+</div>
+
+<script>
+  function calculateAge() {
+    const dobInput = document.getElementById('dob').value;
+    const result = document.getElementById('result');
+
+    if (!dobInput) {
+      result.innerText = "⚠️ Please select your date of birth.";
+      return;
+    }
+
+    const birthDate = new Date(dobInput);
+    const today = new Date();
+
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+
+    if (days < 0) {
+      months--;
+      days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    }
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    result.innerText = `🎂 You are ${years} years, ${months} months, and ${days} days old.`;
+  }
+</script>
+
+</body>
+</html>
