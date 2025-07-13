@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,9 +62,14 @@
 <h2>Forex Pips Calculator</h2>
 
 <select id="pair">
-  <option value="standard">Major Pair (e.g. EUR/USD)</option>
-  <option value="yen">JPY Pair (e.g. USD/JPY)</option>
-  <option value="gold">Gold (XAU/USD)</option>
+  <option value="eurusd">EUR/USD</option>
+  <option value="gbpusd">GBP/USD</option>
+  <option value="audusd">AUD/USD</option>
+  <option value="nzdusd">NZD/USD</option>
+  <option value="usdchf">USD/CHF</option>
+  <option value="usdcad">USD/CAD</option>
+  <option value="usdjpy">USD/JPY</option>
+  <option value="xauusd">XAU/USD (Gold)</option>
   <option value="indices">Indices (e.g. US30)</option>
 </select><br />
 
@@ -85,32 +91,42 @@
 </div>
 
 <script>
-function calculatePips() {
-  const pair = document.getElementById('pair').value;
-  const lot = parseFloat(document.getElementById('lot').value);
-  const entry = parseFloat(document.getElementById('entry').value);
-  const exit = parseFloat(document.getElementById('exit').value);
-  const result = document.getElementById('result');
+  function calculatePips() {
+    const pair = document.getElementById("pair").value;
+    const lot = parseFloat(document.getElementById("lot").value);
+    const entry = parseFloat(document.getElementById("entry").value);
+    const exit = parseFloat(document.getElementById("exit").value);
+    const result = document.getElementById("result");
 
-  if (isNaN(lot) || isNaN(entry) || isNaN(exit)) {
-    result.innerText = "⚠️ Please fill in all values correctly.";
-    return;
+    if (isNaN(lot) || isNaN(entry) || isNaN(exit)) {
+      result.innerText = "⚠️ Please fill in all values correctly.";
+      return;
+    }
+
+    let pipMultiplier;
+    let decimalType;
+
+    if (pair === "usdjpy") {
+      pipMultiplier = 100;
+      decimalType = "JPY (2 decimals)";
+    } else if (pair === "xauusd" || pair === "indices") {
+      pipMultiplier = 1;
+      decimalType = "Gold/Indices";
+    } else {
+      pipMultiplier = 10000;
+      decimalType = "Standard (4 decimals)";
+    }
+
+    const pips = Math.abs(exit - entry) * pipMultiplier;
+    const pipValue = (pair === "xauusd" || pair === "indices") ? 1 : 10;
+    const dollarValue = (pips * lot * pipValue).toFixed(2);
+
+    result.innerHTML = `
+      📊 Pair Type: ${decimalType}<br>
+      📈 Total Pips: ${pips.toFixed(1)}<br>
+      💵 Estimated Value: $${dollarValue}
+    `;
   }
-
-  let pips;
-  if (pair === "yen") {
-    pips = Math.abs(exit - entry) * 100;
-  } else if (pair === "gold" || pair === "indices") {
-    pips = Math.abs(exit - entry); // Raw difference for gold/indices
-  } else {
-    pips = Math.abs(exit - entry) * 10000;
-  }
-
-  const pipValue = (pair === "gold") ? 1 : (pair === "indices") ? 1 : 10;
-  const dollarValue = (pips * lot * pipValue).toFixed(2);
-
-  result.innerHTML = `📈 Total Pips: ${pips.toFixed(1)}<br>💵 Value: $${dollarValue}`;
-}
 </script>
 
 </body>
