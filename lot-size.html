@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forex Lot Size Calculator - SmartDaily Tools</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .branding {
+      background-color: #0A3D62;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .branding img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    h2 {
+      margin-top: 20px;
+    }
+    select, input, button {
+      margin: 8px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      background-color: #0A3D62;
+      color: white;
+      border: none;
+    }
+    .footer {
+      margin-top: 50px;
+      background-color: #f0f0f0;
+      padding: 15px;
+      font-size: 14px;
+      color: #333;
+    }
+    .back-button {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Branding -->
+<div class="branding">
+  <img src="logo.png" alt="Logo" />
+  SmartDaily Tools 🔧 | Free & Simple Tools for Everyday Use
+</div>
+
+<h2>Forex Lot Size Calculator</h2>
+
+<input type="number" id="balance" placeholder="Account Balance (USD)" /><br />
+<input type="number" id="risk" placeholder="Risk % (e.g. 2)" step="0.01" /><br />
+<input type="number" id="stopLoss" placeholder="Stop Loss (in Pips)" /><br />
+<select id="pair">
+  <option value="eurusd">EUR/USD</option>
+  <option value="gbpusd">GBP/USD</option>
+  <option value="audusd">AUD/USD</option>
+  <option value="nzdusd">NZD/USD</option>
+  <option value="usdchf">USD/CHF</option>
+  <option value="usdcad">USD/CAD</option>
+  <option value="usdjpy">USD/JPY</option>
+</select><br />
+
+<button onclick="calculateLotSize()">Calculate</button>
+<p id="result"></p>
+
+<!-- Back to Home -->
+<div class="back-button">
+  <a href="index.html"><button>⬅️ Back to Home</button></a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  © 2025 SmartDaily Tools. All rights reserved.
+</div>
+
+<script>
+  function calculateLotSize() {
+    const balance = parseFloat(document.getElementById("balance").value);
+    const risk = parseFloat(document.getElementById("risk").value);
+    const stopLoss = parseFloat(document.getElementById("stopLoss").value);
+    const pair = document.getElementById("pair").value;
+    const result = document.getElementById("result");
+
+    if (isNaN(balance) || isNaN(risk) || isNaN(stopLoss) || stopLoss === 0) {
+      result.innerText = "⚠️ Please fill in all values correctly.";
+      return;
+    }
+
+    let pipValuePerLot;
+    if (pair === "usdjpy") {
+      pipValuePerLot = 9.13; // average per 1 lot
+    } else {
+      pipValuePerLot = 10.00; // standard
+    }
+
+    const riskAmount = (balance * risk) / 100;
+    const lotSize = riskAmount / (stopLoss * pipValuePerLot);
+
+    result.innerHTML = `
+      💵 Risk Amount: $${riskAmount.toFixed(2)}<br>
+      📈 Recommended Lot Size: <strong>${lotSize.toFixed(2)}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
