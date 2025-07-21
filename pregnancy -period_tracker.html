@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Period & Pregnancy Tracker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fdfdfd;
+      padding: 20px;
+      color: #333;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #d63384;
+    }
+    label, select, input {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px;
+      background: #d63384;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .result {
+      background: #fff3cd;
+      padding: 10px;
+      margin-top: 20px;
+      border-left: 5px solid #d63384;
+    }
+    .section {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Period & Pregnancy Tracker</h1>
+
+  <label for="mode">What would you like to track?</label>
+  <select id="mode" onchange="switchMode()">
+    <option value="">-- Select --</option>
+    <option value="period">Period</option>
+    <option value="pregnancy">Pregnancy</option>
+  </select>
+
+  <!-- Period Tracker Section -->
+  <div id="periodSection" class="section">
+    <label for="lastPeriod">First day of your last period:</label>
+    <input type="date" id="lastPeriod">
+
+    <label for="cycleLength">Your cycle length (average is 28):</label>
+    <input type="number" id="cycleLength" placeholder="e.g. 28">
+
+    <button onclick="calculatePeriod()">Calculate Period</button>
+
+    <div id="periodResult" class="result" style="display:none;"></div>
+  </div>
+
+  <!-- Pregnancy Calculator Section -->
+  <div id="pregnancySection" class="section">
+    <label for="lastPeriodPregnancy">First day of last period:</label>
+    <input type="date" id="lastPeriodPregnancy">
+
+    <button onclick="calculatePregnancy()">Calculate Pregnancy</button>
+
+    <div id="pregnancyResult" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    function switchMode() {
+      const mode = document.getElementById('mode').value;
+      document.getElementById('periodSection').style.display = (mode === 'period') ? 'block' : 'none';
+      document.getElementById('pregnancySection').style.display = (mode === 'pregnancy') ? 'block' : 'none';
+    }
+
+    function calculatePeriod() {
+      const lastPeriod = new Date(document.getElementById('lastPeriod').value);
+      const cycleLength = parseInt(document.getElementById('cycleLength').value || 28);
+
+      const nextPeriod = new Date(lastPeriod);
+      nextPeriod.setDate(nextPeriod.getDate() + cycleLength);
+
+      const ovulation = new Date(lastPeriod);
+      ovulation.setDate(ovulation.getDate() + cycleLength - 14);
+
+      document.getElementById('periodResult').innerHTML =
+        `<strong>Next Period:</strong> ${nextPeriod.toDateString()}<br>
+         <strong>Ovulation Day:</strong> ${ovulation.toDateString()}`;
+      document.getElementById('periodResult').style.display = 'block';
+    }
+
+    function calculatePregnancy() {
+      const lastPeriod = new Date(document.getElementById('lastPeriodPregnancy').value);
+      const today = new Date();
+
+      const dueDate = new Date(lastPeriod);
+      dueDate.setDate(dueDate.getDate() + 280);
+
+      const weeksPregnant = Math.floor((today - lastPeriod) / (1000 * 60 * 60 * 24 * 7));
+
+      document.getElementById('pregnancyResult').innerHTML =
+        `<strong>Estimated Due Date:</strong> ${dueDate.toDateString()}<br>
+         <strong>You are:</strong> ${weeksPregnant} weeks pregnant`;
+      document.getElementById('pregnancyResult').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
