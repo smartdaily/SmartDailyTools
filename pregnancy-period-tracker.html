@@ -1,61 +1,113 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pregnancy + Period Tracker Tool</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #023047;
+      color: #fff;
+      padding: 20px;
+    }
+    a {
+      color: #8ecae6;
+      text-decoration: none;
+    }
+    h1, h2 {
+      color: #ffb703;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, button {
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 1em;
+    }
+    .section {
+      margin-bottom: 30px;
+      background: #219ebc;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="tool-container">
-    <a href="../index.html" class="back-button">← Back to Home</a>
-    <h1 class="tool-title">Pregnancy + Period Tracker</h1>
-    <p class="tool-description">Track your ovulation, pregnancy weeks, and estimated due date easily.</p>
 
-    <div class="tool-box">
-      <label for="lastPeriod">Last Menstrual Period (LMP):</label>
-      <input type="date" id="lastPeriod">
+  <a href="index.html">← Back to Home</a>
+  <h1>Pregnancy + Period Tracker</h1>
 
-      <label for="cycleLength">Average Cycle Length (days):</label>
-      <input type="number" id="cycleLength" value="28" min="20" max="40">
+  <div class="section">
+    <h2>Pregnancy Tracker</h2>
+    <label for="lmp">Last Menstrual Period (LMP):</label>
+    <input type="date" id="lmp" />
+    
+    <label for="cycleLength">Average Cycle Length (days):</label>
+    <input type="number" id="cycleLength" value="28" />
+    
+    <button onclick="calculatePregnancy()">Track</button>
 
-      <button onclick="calculatePregnancy()">Track</button>
+    <p id="ovulationDate"></p>
+    <p id="dueDate"></p>
+    <p id="weeksPregnant"></p>
+  </div>
 
-      <div id="result" class="result-box"></div>
-    </div>
+  <div class="section">
+    <h2>Period Tracker</h2>
+    <label for="lastPeriod">Last Period Start Date:</label>
+    <input type="date" id="lastPeriod" />
+
+    <label for="periodCycle">Cycle Length (days):</label>
+    <input type="number" id="periodCycle" value="28" />
+
+    <button onclick="trackPeriod()">Predict</button>
+
+    <p id="nextPeriod"></p>
+    <p id="fertileWindow"></p>
   </div>
 
   <script>
     function calculatePregnancy() {
-      const lmp = new Date(document.getElementById("lastPeriod").value);
+      const lmp = new Date(document.getElementById("lmp").value);
       const cycleLength = parseInt(document.getElementById("cycleLength").value);
-      if (isNaN(lmp.getTime()) || isNaN(cycleLength)) {
-        document.getElementById("result").innerHTML = "❌ Please enter valid data.";
-        return;
-      }
 
-      const ovulationDate = new Date(lmp.getTime() + (cycleLength - 14) * 24 * 60 * 60 * 1000);
-      const dueDate = new Date(lmp.getTime() + 280 * 24 * 60 * 60 * 1000);
-      const today = new Date();
-      const weeksPregnant = Math.floor((today - lmp) / (7 * 24 * 60 * 60 * 1000));
+      if (isNaN(lmp) || isNaN(cycleLength)) return;
 
-      let pregnancyStatus = "";
-      if (today < ovulationDate) {
-        pregnancyStatus = "🌸 You are likely not pregnant yet. You're in your fertile window.";
-      } else if (today >= ovulationDate && today <= dueDate) {
-        pregnancyStatus = `🤰 You are approximately <strong>${weeksPregnant} weeks</strong> pregnant.`;
-      } else {
-        pregnancyStatus = "🍼 Your due date has passed. Please confirm with a healthcare provider.";
-      }
+      const ovulation = new Date(lmp);
+      ovulation.setDate(lmp.getDate() + (cycleLength - 14));
 
-      document.getElementById("result").innerHTML = `
-        <p>Estimated Ovulation Date: <strong>${ovulationDate.toDateString()}</strong></p>
-        <p>Estimated Due Date: <strong>${dueDate.toDateString()}</strong></p>
-        <p>${pregnancyStatus}</p>
-      `;
+      const dueDate = new Date(lmp);
+      dueDate.setDate(lmp.getDate() + 280);
+
+      const now = new Date();
+      const diff = Math.floor((now - lmp) / (1000 * 60 * 60 * 24 * 7));
+
+      document.getElementById("ovulationDate").innerText = `Estimated Ovulation Date: ${ovulation.toDateString()}`;
+      document.getElementById("dueDate").innerText = `Estimated Due Date: ${dueDate.toDateString()}`;
+      document.getElementById("weeksPregnant").innerHTML = `🤰 You are approximately <strong>${diff} weeks</strong> pregnant.`;
+    }
+
+    function trackPeriod() {
+      const last = new Date(document.getElementById("lastPeriod").value);
+      const cycle = parseInt(document.getElementById("periodCycle").value);
+
+      if (isNaN(last) || isNaN(cycle)) return;
+
+      const next = new Date(last);
+      next.setDate(last.getDate() + cycle);
+
+      const fertileStart = new Date(next);
+      fertileStart.setDate(next.getDate() - 14);
+      const fertileEnd = new Date(fertileStart);
+      fertileEnd.setDate(fertileStart.getDate() + 5);
+
+      document.getElementById("nextPeriod").innerText = `Next Period Expected: ${next.toDateString()}`;
+      document.getElementById("fertileWindow").innerText = `Fertile Window: ${fertileStart.toDateString()} to ${fertileEnd.toDateString()}`;
     }
   </script>
 </body>
 </html>
-
